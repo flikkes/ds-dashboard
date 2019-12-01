@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dreamshare Dashboard</title>
+    <script src="jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    Welcome! The content below was server generated and shipped as a customizable .js lib.
+    <div id=app v-html="renderer">
+    </div>
+
+    <script type="text/javascript">
+
+        var htmlUrl = 'http://localhost:8080/renderer/template?rendererName=default';
+        var scriptUrl = 'http://localhost:8080/renderer/script?rendererName=default';
+
+        $(document).ready(function () {
+            $.get(htmlUrl).done(function (result) {
+                console.log(result);
+                var app = new Vue({
+                    el: '#app',
+                    data: {
+                        renderer: result
+                    },
+                    mounted() {
+                        var rendererScript = document.createElement('script');
+                        rendererScript.setAttribute('src', scriptUrl);
+                        document.head.appendChild(rendererScript);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
