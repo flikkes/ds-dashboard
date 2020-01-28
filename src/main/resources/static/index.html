@@ -5,20 +5,42 @@
     <title>Dreamshare Dashboard</title>
     <script src="jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="http://localhost:8080/renderer/script?rendererName=default"></script>
+    <script type="text/javascript" src="js/Pagination.js"></script>
+    <script type="text/javascript" src="js/Timeline.js"></script>
+    <!--<script type="text/javascript" src="js/Login.js"></script>-->
 
 </head>
 
 <body>
-    Welcome! The content below was server generated and shipped as a customizable .js lib.
-    <div id=app>
+<div id="timeline">
+    <div>
+        <div v-if="!loggedIn">
+            <form class="login" @submit.prevent="login">
+                <h1>Sign in</h1>
+                <label>User name</label>
+                <input required v-model="username" type="text" placeholder="Username"/>
+                <label>Password</label>
+                <input required v-model="password" type="password" placeholder="Password"/>
+                <hr/>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            new Renderer('#app').inject();
-        });
-    </script>
+
+    <div >
+        <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
+        <div v-for="img in imgs">
+            <img width="25%" height="25%" v-bind:src="img.href"><br>
+            <button @click="function() {transform(img);}" v-show="!img.transformedHref">Transform</button>
+            <img width="25%" height="25%" v-show="img.transformedHref" v-bind:src="img.transformedHref"><br>
+        </div>
+        <button @click="prevPageImagesData">Prev</button>
+        <button @click="nextPageImagesData">Next</button>
+    </div>
+
+</div>
+
 </body>
 
 </html>
